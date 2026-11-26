@@ -45,7 +45,7 @@ public class EnemyMovement : MonoBehaviour
             Vector3 startPosition = transform.position;
             Vector3 targetPosition = startPosition + (transform.forward * _stepDistance);
 
-            // 3. Move smoothly until reaching the target position
+            // Se mueve a la posicion 
             while (Vector3.Distance(transform.position, targetPosition) > 0.01f)
             {
                 transform.position = Vector3.MoveTowards(
@@ -56,8 +56,7 @@ public class EnemyMovement : MonoBehaviour
 
                 yield return null;
             }
-
-            // Snap to exact final position to avoid floating point drift
+            // Ajusta a la posición final exacta para evitar desviaciones por decimales (punto flotante)
             transform.position = targetPosition;
         }
     }    
