@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class CircleLoop : MonoBehaviour
 {
     [SerializeField] private GameplayStats gameplayStats;
+    [SerializeField] private Animator _animator;
     private float loopTime;
     private float elapsed;
     private float loopValue;
@@ -32,16 +33,22 @@ public class CircleLoop : MonoBehaviour
             {
                 score += Mathf.RoundToInt(loopValue * gameplayStats.ExtraScoreMultiplier);
                 Debug.Log("Suma Extra! Score: " + score);
+                _animator.SetBool("Success", true);
+                _animator.SetBool("Fail", false);
             }
             else if (loopValue >= 0.6f && loopValue < 0.8f)
             {
                 score += Mathf.RoundToInt(loopValue * gameplayStats.ScoreMultiplier);
                 Debug.Log("Suma puntaje! Score: " + score);
+                _animator.SetBool("Fail", false);
+                _animator.SetBool("Success", true);
             }
             else
             {
                 score += Mathf.RoundToInt(loopValue * gameplayStats.ScoreMultiplier);
                 Debug.Log("Se acerca Kotaix! Score: " + score);
+                _animator.SetBool("Fail", true);
+                _animator.SetBool("Success", false);
             }   
         }
 

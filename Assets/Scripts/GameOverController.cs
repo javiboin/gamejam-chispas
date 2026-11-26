@@ -11,7 +11,7 @@ public class GameOverController : MonoBehaviour
 
     private void Start()
     {
-  
+
         if (_gameOverPanel != null)
         {
             _gameOverPanel.SetActive(false);
