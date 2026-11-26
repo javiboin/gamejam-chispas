@@ -15,3 +15,5 @@ MonoBehaviour:
   LoopTime: 0.8
   maxScale: 2.8
   minScale: 0.2
+  scoreMultiplier: 100
+  extraScoreMultiplier: 200
