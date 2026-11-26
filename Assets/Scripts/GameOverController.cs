@@ -8,6 +8,8 @@ public class GameOverController : MonoBehaviour
 
     [Header("Scene Settings")]
     [SerializeField] private string _mainMenuSceneName = "MainMenu"; 
+    [SerializeField] private string _restartSceneName; 
+
 
     private void Start()
     {
@@ -34,7 +36,7 @@ public class GameOverController : MonoBehaviour
     public void RestartLevel()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(_restartSceneName);
     }
 
     public void GoToMainMenu()

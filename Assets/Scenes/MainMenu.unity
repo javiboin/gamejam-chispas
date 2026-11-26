@@ -761,7 +761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 896cca2aaba15374c8e8961c7dfc5cd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuController
-  _gameSceneName: Level1
+  _gameSceneName: MainScene
   _creditsPanel: {fileID: 1199983283}
 --- !u!4 &731452524
 Transform:
