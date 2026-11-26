@@ -8,10 +8,14 @@ public class CircleLoop : MonoBehaviour
     private float elapsed;
     private float loopValue;
 
+    private int score;
+
     private void Start()
     {
         loopTime = gameplayStats.MaxLoopTime;
         transform.localScale = Vector3.one * gameplayStats.MaxScale;
+
+        score = 0;
     }
 
     private void Update()
@@ -24,6 +28,21 @@ public class CircleLoop : MonoBehaviour
         if ((Keyboard.current.spaceKey.wasPressedThisFrame) || (Mouse.current.leftButton.wasPressedThisFrame))
         {
             Debug.Log(loopValue);
+            if (loopValue >= 0.8f)
+            {
+                score += Mathf.RoundToInt(loopValue * gameplayStats.ExtraScoreMultiplier);
+                Debug.Log("Suma Extra! Score: " + score);
+            }
+            else if (loopValue >= 0.6f && loopValue < 0.8f)
+            {
+                score += Mathf.RoundToInt(loopValue * gameplayStats.ScoreMultiplier);
+                Debug.Log("Suma puntaje! Score: " + score);
+            }
+            else
+            {
+                score += Mathf.RoundToInt(loopValue * gameplayStats.ScoreMultiplier);
+                Debug.Log("Se acerca Kotaix! Score: " + score);
+            }   
         }
 
         // Mathf.PingPong devuelve un valor que oscila entre 0 y 1 en función del tiempo transcurrido. 
