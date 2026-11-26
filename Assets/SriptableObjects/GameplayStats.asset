@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a6655bfd281abc46b4438ea580db1c1, type: 3}
   m_Name: GameplayStats
   m_EditorClassIdentifier: Assembly-CSharp::GameplayStats
-  maxLoopTime: 1
+  LoopTime: 0.8
+  maxScale: 2.8
+  minScale: 0.2
