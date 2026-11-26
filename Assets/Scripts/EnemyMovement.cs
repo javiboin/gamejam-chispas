@@ -38,10 +38,10 @@ public class EnemyMovement : MonoBehaviour
     {
         while (true)
         {
-            // 1. Wait the configured time before moving
+            // Tiempo de espera
             yield return new WaitForSeconds(_waitInterval);
-
-            // 2. Calculate target position straight ahead (local Z axis / blue arrow)
+        
+            // Calcula la posición destino en línea recta hacia adelante (eje Z local / flecha azul)
             Vector3 startPosition = transform.position;
             Vector3 targetPosition = startPosition + (transform.forward * _stepDistance);
 

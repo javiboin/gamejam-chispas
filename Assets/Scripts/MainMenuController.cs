@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class MainMenuController : MonoBehaviour
 {
     [Header("Scene Settings")]
-    [SerializeField] private string _gameSceneName = "Level1"; //podemos usar el index de escenas (aunque igual son pocas xd)
+    [SerializeField] private string _gameSceneName = "MainScene"; //podemos usar el index de escenas (aunque igual son pocas xd)
 
     [Header("UI Panels")]
     [SerializeField] private GameObject _creditsPanel;
