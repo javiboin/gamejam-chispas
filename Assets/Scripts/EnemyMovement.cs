@@ -3,61 +3,77 @@ using System.Collections;
 
 public class EnemyMovement : MonoBehaviour
 {
+    [SerializeField] private CircleLoop _circleLoop; 
     [Header("Movement Settings")]
     [SerializeField] private float _stepDistance = 3f; //distancia en mtss
-
-    [SerializeField] private float _waitInterval = 2f; //segs movimiento
-
+    //[SerializeField] private float _waitInterval = 2f; //segs movimiento
     [SerializeField] private float _moveSpeed = 6f; //velocidad de mov
+    
+    [Header ("Game Over Settings")]
+    [SerializeField] private int _stepsToReachThePlayer = 9; //pasos para agarrar al jugador
+    [SerializeField] GameOverController _gameOverController;
 
+    [Header("Target Settings")]
+    [SerializeField] private Transform _playerTarget; //el enemigo, asi el player siempre mira al enemigo
+
+    private Vector3 _targetPosition;
     private Coroutine _moveRoutine;
+    private int _currentSteps;
 
     private void Start()
     {
-        StartMoving();
+        if (_playerTarget != null)
+        {
+            // El enemigo mira al player horizontal
+            Vector3 lookPosition = new Vector3(_playerTarget.position.x, transform.position.y, _playerTarget.position.z);
+            transform.LookAt(lookPosition);
+        }
+        //Posicion inicio enemigo
+        _targetPosition = transform.position;
+        _currentSteps = 0;
     }
 
-    public void StartMoving()
+    // Llamamos a este metodo desde CIRCLELOOP cuando el jugador ERRA
+
+    public void StepForward()
     {
+        _currentSteps++;
+        //agrega 1 step forward a la posicion actual
+        _targetPosition += transform.forward * _stepDistance;
+
         if (_moveRoutine == null)
         {
-            _moveRoutine = StartCoroutine(MoveForwardRoutine());
+            _moveRoutine = StartCoroutine(MoveToTargetRoutine());
         }
     }
 
-    public void StopMoving()
+    private IEnumerator MoveToTargetRoutine()
     {
-        if (_moveRoutine != null)
+        while (Vector3.Distance(transform.position, _targetPosition)> 0.01f)
         {
-            StopCoroutine(_moveRoutine);
-            _moveRoutine = null;
+            transform.position = Vector3.MoveTowards(
+                transform.position,
+                _targetPosition,
+                _moveSpeed * Time.deltaTime
+            );
+            yield return null;
+        }
+        // ultima posicion
+        transform.position = _targetPosition;
+        _moveRoutine = null;
+
+        if (_currentSteps >= _stepsToReachThePlayer)
+        {
+            TriggerPlayerCaught();
         }
     }
-
-    private IEnumerator MoveForwardRoutine()
+    private void TriggerPlayerCaught()
     {
-        while (true)
+        Debug.Log("te agarro el chobi. GAME OVER!");
+        if(_gameOverController != null)
         {
-            // Tiempo de espera
-            yield return new WaitForSeconds(_waitInterval);
-        
-            // Calcula la posición destino en línea recta hacia adelante (eje Z local / flecha azul)
-            Vector3 startPosition = transform.position;
-            Vector3 targetPosition = startPosition + (transform.forward * _stepDistance);
-
-            // Se mueve a la posicion 
-            while (Vector3.Distance(transform.position, targetPosition) > 0.01f)
-            {
-                transform.position = Vector3.MoveTowards(
-                    transform.position,
-                    targetPosition,
-                    _moveSpeed * Time.deltaTime
-                );
-
-                yield return null;
-            }
-            // Ajusta a la posición final exacta para evitar desviaciones por decimales (punto flotante)
-            transform.position = targetPosition;
+            int finalScore = _circleLoop != null ? _circleLoop.Score : 0;
+            _gameOverController.TriggerGameOver(finalScore);
         }
-    }    
+    }
 }

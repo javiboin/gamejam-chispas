@@ -220,7 +220,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &531621976883664904
 Transform:
   m_ObjectHideFlags: 0
@@ -250,7 +250,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameOverController
   _gameOverPanel: {fileID: 7313288883924375511}
+  _finalScoreText: {fileID: 155685038087729276}
   _mainMenuSceneName: MainMenu
+  _restartSceneName: MainScene
 --- !u!1 &3502238961826077828
 GameObject:
   m_ObjectHideFlags: 0
