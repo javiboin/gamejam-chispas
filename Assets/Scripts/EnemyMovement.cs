@@ -4,6 +4,7 @@ using System.Collections;
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private CircleLoop _circleLoop; 
+    [SerializeField] private Animator _animator;
     [Header("Movement Settings")]
     [SerializeField] private float _stepDistance = 3f; //distancia en mtss
     //[SerializeField] private float _waitInterval = 2f; //segs movimiento
@@ -19,6 +20,15 @@ public class EnemyMovement : MonoBehaviour
     private Vector3 _targetPosition;
     private Coroutine _moveRoutine;
     private int _currentSteps;
+    private static readonly int ApproachTrigger = Animator.StringToHash("Approach");
+
+    private void Awake()
+    {
+        if (_animator == null)
+        {
+            _animator = GetComponentInChildren<Animator>();
+        }
+    }
 
     private void Start()
     {
@@ -40,6 +50,11 @@ public class EnemyMovement : MonoBehaviour
         _currentSteps++;
         //agrega 1 step forward a la posicion actual
         _targetPosition += transform.forward * _stepDistance;
+
+        if (_animator != null)
+        {
+            _animator.SetTrigger(ApproachTrigger);
+        }
 
         if (_moveRoutine == null)
         {
