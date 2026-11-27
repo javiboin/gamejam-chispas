@@ -618,7 +618,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 75367488}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -767,7 +767,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1912435}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -786,8 +786,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6defb465e5ec3841af0dd469abaf775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HUDController
-  textoScore: {fileID: 1429587867}
-  sufijo: Score
+  textoScore: {fileID: 610819231}
+  sufijo: 
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -974,7 +974,6 @@ GameObject:
   - component: {fileID: 1145992785}
   - component: {fileID: 1145992784}
   - component: {fileID: 1145992783}
-  - component: {fileID: 1145992787}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1204,7 +1203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f587d0d9fdb78b046885dbc585cd52a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
-  _circleLoop: {fileID: 1651053590}
+  _circleLoop: {fileID: 0}
   _stepDistance: 1
   _moveSpeed: 2
   _stepsToReachThePlayer: 4
@@ -1220,7 +1219,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1651053589}
   - component: {fileID: 1651053588}
-  - component: {fileID: 1651053590}
+  - component: {fileID: 1651053587}
   m_Layer: 0
   m_Name: LoopArea
   m_TagString: Untagged
@@ -1540,7 +1539,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 330585546}
   - {fileID: 410087041}
-  - {fileID: 1912435}
   - {fileID: 832575519}
   - {fileID: 672158680}
   - {fileID: 1145992786}
@@ -1550,3 +1548,6 @@ SceneRoots:
   - {fileID: 4131785682673189168}
   - {fileID: 214162106}
   - {fileID: 1651053589}
+  - {fileID: 7934156008311095997}
+  - {fileID: 610819233}
+  - {fileID: 758753124}
