@@ -4,6 +4,9 @@ using UnityEngine.InputSystem;
 
 public class CircleLoop : MonoBehaviour
 {
+    private const float ScorePulseDuration = 0.2f;
+    private const float ScorePulseStrength = 0.2f;
+
     private static readonly int SuccessTrigger = Animator.StringToHash("Success");
     private static readonly int FailTrigger = Animator.StringToHash("Fail");
     [SerializeField] private GameplayStats gameplayStats;
@@ -17,6 +20,7 @@ public class CircleLoop : MonoBehaviour
     private float loopTime;
     private float elapsed;
     private float loopValue;
+    private float scorePulseElapsed = ScorePulseDuration;
     private int score;
     public int Score => score; 
 
@@ -38,33 +42,39 @@ public class CircleLoop : MonoBehaviour
         elapsed += Time.deltaTime;
         loopValue = Mathf.PingPong(elapsed / loopTime, 1f);
         float scale = Mathf.Lerp(gameplayStats.MaxScale, gameplayStats.MinScale, loopValue);
-        transform.localScale = Vector3.one * scale;
+        float pulseMultiplier = 1f;
+        if (scorePulseElapsed < ScorePulseDuration)
+        {
+            scorePulseElapsed = Mathf.Min(scorePulseElapsed + Time.unscaledDeltaTime, ScorePulseDuration);
+            float pulseProgress = scorePulseElapsed / ScorePulseDuration;
+            pulseMultiplier += Mathf.Sin(pulseProgress * Mathf.PI) * ScorePulseStrength;
+        }
+        transform.localScale = Vector3.one * scale * pulseMultiplier;
+
+        changeColor();
 
         if ((Keyboard.current.spaceKey.wasPressedThisFrame) || (Mouse.current.leftButton.wasPressedThisFrame))
         {
             Debug.Log(loopValue);
-            if (loopValue >= 0.8f)
+            if (loopValue >= 0.7f)
             {
                 int points = Mathf.RoundToInt(loopValue * gameplayStats.ExtraScoreMultiplier);
-                score += points;
-                onScoreChanged?.Invoke(points);
+                RegistrarPuntaje(points);
 
 
                 Debug.Log("Suma Extra! Score: " + score);
 
 
 
-                //_extraPointArea.enabled = true;
                 _spriteRenderer.color = Color.green;
                 PlayResultAnimation(success: true);
 
                 if (_chispasGolpe != null) _chispasGolpe.Play();
             }
-            else if (loopValue >= 0.6f && loopValue < 0.8f)
+            else if (loopValue >= 0.5f && loopValue < 0.7f)
             {
                 int points = Mathf.RoundToInt(loopValue * gameplayStats.ScoreMultiplier);
-                score += points;
-                onScoreChanged?.Invoke(points);
+                RegistrarPuntaje(points);
 
 
                 Debug.Log("Suma puntaje! Score: " + score);
@@ -80,8 +90,7 @@ public class CircleLoop : MonoBehaviour
             else
             {
                 int points = Mathf.RoundToInt(loopValue * gameplayStats.ScoreMultiplier);
-                score += points;
-                onScoreChanged?.Invoke(points);
+                RegistrarPuntaje(points);
 
                 Debug.Log("Se acerca Kotaix! Score: " + score);
 
@@ -102,10 +111,37 @@ public class CircleLoop : MonoBehaviour
         // Luego, Mathf.PingPong hace que este valor oscile entre 0 y 1, creando un efecto de ida y vuelta.
     }
 
+    private void RegistrarPuntaje(int puntos)
+    {
+        score += puntos;
+        onScoreChanged?.Invoke(puntos);
+
+        if (puntos != 0)
+        {
+            scorePulseElapsed = 0f;
+        }
+    }
+
     private void PlayResultAnimation(bool success)
     {
         _animator.ResetTrigger(SuccessTrigger);
         _animator.ResetTrigger(FailTrigger);
         _animator.SetTrigger(success ? SuccessTrigger : FailTrigger);
+    }
+
+    private void changeColor()
+    {
+            if (loopValue >= 0.7f)
+            {
+                _spriteRenderer.color = Color.green;
+            }
+            else if (loopValue >= 0.5f && loopValue < 0.7f)
+            {
+                _spriteRenderer.color = Color.yellow;
+            }
+            else
+            {
+                _spriteRenderer.color = Color.red;
+            } 
     }
 }
