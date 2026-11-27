@@ -69,7 +69,7 @@ public class EnemyMovement : MonoBehaviour
     }
     private void TriggerPlayerCaught()
     {
-        Debug.Log("te agarro el chobi. GAME OVER!");
+        Debug.Log("GAME OVER!");
         if(_gameOverController != null)
         {
             int finalScore = _circleLoop != null ? _circleLoop.Score : 0;

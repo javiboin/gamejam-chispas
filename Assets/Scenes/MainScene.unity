@@ -293,7 +293,7 @@ Transform:
   m_GameObject: {fileID: 214162105}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0037675614, y: -0.78130287, z: 0.0033526067, w: 0.62413174}
-  m_LocalPosition: {x: -3.153, y: 1.748, z: 10.189}
+  m_LocalPosition: {x: -3.153, y: 2.002, z: 10.184}
   m_LocalScale: {x: 2.8, y: 2.8, z: 2.8}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -611,7 +611,7 @@ Light:
   serializedVersion: 12
   m_Type: 1
   m_Color: {r: 0.11268772, g: 0.22193652, b: 0.5018867, a: 1}
-  m_Intensity: 8.09
+  m_Intensity: 32.46
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1978,6 +1978,7 @@ MonoBehaviour:
   gameplayStats: {fileID: 11400000, guid: 438ffe28d66e1874bb6b7c7af4ced950, type: 2}
   _enemyMovement: {fileID: 1090909345}
   _animator: {fileID: 1969452119}
+  _spriteRenderer: {fileID: 0}
   _chispasGolpe: {fileID: 1220421819}
 --- !u!4 &1715985425 stripped
 Transform:
@@ -2197,7 +2198,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 60, y: -12}
+  m_AnchoredPosition: {x: 60, y: -170.2}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1896831233

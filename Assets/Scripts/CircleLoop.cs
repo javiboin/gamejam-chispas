@@ -9,6 +9,7 @@ public class CircleLoop : MonoBehaviour
     [SerializeField] private GameplayStats gameplayStats;
     [SerializeField] private EnemyMovement _enemyMovement;
     [SerializeField] private Animator _animator;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
 
     [Header("VFX Partículas")]
     [SerializeField] private ParticleSystem _chispasGolpe;
@@ -17,7 +18,7 @@ public class CircleLoop : MonoBehaviour
     private float elapsed;
     private float loopValue;
     private int score;
-    public int Score => score; //publica para mostrarla
+    public int Score => score; 
 
     public Action<int> onScoreChanged;
 
@@ -27,6 +28,9 @@ public class CircleLoop : MonoBehaviour
         transform.localScale = Vector3.one * gameplayStats.MaxScale;
 
         score = 0;
+
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        //_spriteRenderer.enabled = false;
     }
 
     private void Update()
@@ -44,7 +48,14 @@ public class CircleLoop : MonoBehaviour
                 int points = Mathf.RoundToInt(loopValue * gameplayStats.ExtraScoreMultiplier);
                 score += points;
                 onScoreChanged?.Invoke(points);
+
+
                 Debug.Log("Suma Extra! Score: " + score);
+
+
+
+                //_extraPointArea.enabled = true;
+                _spriteRenderer.color = Color.green;
                 PlayResultAnimation(success: true);
 
                 if (_chispasGolpe != null) _chispasGolpe.Play();
@@ -54,7 +65,14 @@ public class CircleLoop : MonoBehaviour
                 int points = Mathf.RoundToInt(loopValue * gameplayStats.ScoreMultiplier);
                 score += points;
                 onScoreChanged?.Invoke(points);
+
+
                 Debug.Log("Suma puntaje! Score: " + score);
+
+
+
+                _spriteRenderer.color = Color.yellow;
+
                 PlayResultAnimation(success: true);
 
                 if (_chispasGolpe != null) _chispasGolpe.Play();
@@ -64,7 +82,12 @@ public class CircleLoop : MonoBehaviour
                 int points = Mathf.RoundToInt(loopValue * gameplayStats.ScoreMultiplier);
                 score += points;
                 onScoreChanged?.Invoke(points);
+
                 Debug.Log("Se acerca Kotaix! Score: " + score);
+
+                _spriteRenderer.color = Color.red;
+
+                
                 PlayResultAnimation(success: false);
 
                 if (_enemyMovement != null)
