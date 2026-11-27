@@ -5,12 +5,14 @@ using UnityEngine.InputSystem;
 public class CircleLoop : MonoBehaviour
 {
     [SerializeField] private GameplayStats gameplayStats;
+    [SerializeField] private EnemyMovement _enemyMovement;
     [SerializeField] private Animator _animator;
     private float loopTime;
     private float elapsed;
     private float loopValue;
+    private int score;
+    public int Score => score; //publica para mostrarla
 
-    private int _score;
     public Action onScoreChanged;
 
     private void Start()
@@ -18,7 +20,7 @@ public class CircleLoop : MonoBehaviour
         loopTime = gameplayStats.MaxLoopTime;
         transform.localScale = Vector3.one * gameplayStats.MaxScale;
 
-        _score = 0;
+        score = 0;
     }
 
     private void Update()
@@ -33,30 +35,30 @@ public class CircleLoop : MonoBehaviour
             Debug.Log(loopValue);
             if (loopValue >= 0.8f)
             {
-                _score += Mathf.RoundToInt(loopValue * gameplayStats.ExtraScoreMultiplier);
+                score += Mathf.RoundToInt(loopValue * gameplayStats.ExtraScoreMultiplier);
                 onScoreChanged?.Invoke();
-                Debug.Log("Suma Extra! Score: " + _score);
+                Debug.Log("Suma Extra! Score: " + score);
                 _animator.SetBool("Success", true);
                 _animator.SetBool("Fail", false);
             }
             else if (loopValue >= 0.6f && loopValue < 0.8f)
             {
-                _score += Mathf.RoundToInt(loopValue * gameplayStats.ScoreMultiplier);
+                score += Mathf.RoundToInt(loopValue * gameplayStats.ScoreMultiplier);
                 onScoreChanged?.Invoke();
-                Debug.Log("Suma puntaje! Score: " + _score);
+                Debug.Log("Suma puntaje! Score: " + score);
                 _animator.SetBool("Fail", false);
                 _animator.SetBool("Success", true);
             }
             else
             {
-                _score += Mathf.RoundToInt(loopValue * gameplayStats.ScoreMultiplier);
+                score += Mathf.RoundToInt(loopValue * gameplayStats.ScoreMultiplier);
                 onScoreChanged?.Invoke(); 
-                Debug.Log("Se acerca Kotaix! Score: " + _score);
+                Debug.Log("Se acerca Kotaix! Score: " + score);
                 _animator.SetBool("Fail", true);
                 _animator.SetBool("Success", false);
+
             }   
         }
-
         // Mathf.PingPong devuelve un valor que oscila entre 0 y 1 en función del tiempo transcurrido. 
         // Al dividir elapsed por loopTime, obtenemos un valor que representa el progreso de la animación en el rango de 0 a 1. 
         // Luego, Mathf.PingPong hace que este valor oscile entre 0 y 1, creando un efecto de ida y vuelta.
