@@ -7,6 +7,10 @@ public class CircleLoop : MonoBehaviour
     [SerializeField] private GameplayStats gameplayStats;
     [SerializeField] private EnemyMovement _enemyMovement;
     [SerializeField] private Animator _animator;
+
+    [Header("VFX Partículas")]
+    [SerializeField] private ParticleSystem _chispasGolpe;
+
     private float loopTime;
     private float elapsed;
     private float loopValue;
@@ -41,6 +45,8 @@ public class CircleLoop : MonoBehaviour
                 Debug.Log("Suma Extra! Score: " + score);
                 _animator.SetBool("Success", true);
                 _animator.SetBool("Fail", false);
+
+                if (_chispasGolpe != null) _chispasGolpe.Play();
             }
             else if (loopValue >= 0.6f && loopValue < 0.8f)
             {
@@ -50,6 +56,8 @@ public class CircleLoop : MonoBehaviour
                 Debug.Log("Suma puntaje! Score: " + score);
                 _animator.SetBool("Success", true);
                 _animator.SetBool("Fail", false);
+
+                if (_chispasGolpe != null) _chispasGolpe.Play();
             }
             else
             {
