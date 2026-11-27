@@ -45,6 +45,9 @@ public class EnemyMovement : MonoBehaviour
         {
             _moveRoutine = StartCoroutine(MoveToTargetRoutine());
         }
+
+
+        // Aca se activa la animacion BOOL?
     }
 
     private IEnumerator MoveToTargetRoutine()
@@ -71,7 +74,7 @@ public class EnemyMovement : MonoBehaviour
     {
         Debug.Log("GAME OVER!");
         AudioManager.Instance?.PlayKotaixScream();
-        if (_gameOverController != null)
+        if(_gameOverController != null)
         {
             int finalScore = _circleLoop != null ? _circleLoop.Score : 0;
             _gameOverController.TriggerGameOver(finalScore);
