@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.InputSystem;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,7 +15,8 @@ public class GameManager : MonoBehaviour
     public HUDController hudController;
     public GameObject panelGameOver;
     public TextMeshProUGUI textoScoreFinal;
-    //public Action onScoreChanged;
+    [SerializeField] private CircleLoop circleLoop;
+    public Action<int> onScoreChanged;
 
     [Header("Modo Prueba (Tarea 2 - Punto 3)")]
     public bool modoPruebaClick = true;
@@ -31,6 +33,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        if (circleLoop != null)
+        {
+            circleLoop.onScoreChanged += SumarPuntos;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (circleLoop != null)
+        {
+            circleLoop.onScoreChanged -= SumarPuntos;
+        }
+    }
+
     private void Start()
     {
         if (panelGameOver != null)
@@ -39,21 +57,11 @@ public class GameManager : MonoBehaviour
         }
         ActualizarUI();
     }
-
-    private void Update()
-    {
-        if (modoPruebaClick && Keyboard.current.eKey.wasPressedThisFrame)
-        {
-            Debug.Log("Tenes Puntaje");
-            SumarPuntos(1);
-        }
-    }
-
-    
     public void SumarPuntos(int puntajeDelMomento)
     {
         scoreTotal += puntajeDelMomento;
         ActualizarUI();
+        onScoreChanged?.Invoke(scoreTotal);
     }
 
     public void ActivarGameOver()

@@ -13,7 +13,7 @@ public class CircleLoop : MonoBehaviour
     private int score;
     public int Score => score; //publica para mostrarla
 
-    public Action onScoreChanged;
+    public Action<int> onScoreChanged;
 
     private void Start()
     {
@@ -35,27 +35,30 @@ public class CircleLoop : MonoBehaviour
             Debug.Log(loopValue);
             if (loopValue >= 0.8f)
             {
-                score += Mathf.RoundToInt(loopValue * gameplayStats.ExtraScoreMultiplier);
-                onScoreChanged?.Invoke();
+                int points = Mathf.RoundToInt(loopValue * gameplayStats.ExtraScoreMultiplier);
+                score += points;
+                onScoreChanged?.Invoke(points);
                 Debug.Log("Suma Extra! Score: " + score);
                 _animator.SetBool("Success", true);
                 _animator.SetBool("Fail", false);
             }
             else if (loopValue >= 0.6f && loopValue < 0.8f)
             {
-                score += Mathf.RoundToInt(loopValue * gameplayStats.ScoreMultiplier);
-                onScoreChanged?.Invoke();
+                int points = Mathf.RoundToInt(loopValue * gameplayStats.ScoreMultiplier);
+                score += points;
+                onScoreChanged?.Invoke(points);
                 Debug.Log("Suma puntaje! Score: " + score);
-                _animator.SetBool("Fail", false);
                 _animator.SetBool("Success", true);
+                _animator.SetBool("Fail", false);
             }
             else
             {
-                score += Mathf.RoundToInt(loopValue * gameplayStats.ScoreMultiplier);
-                onScoreChanged?.Invoke(); 
+                int points = Mathf.RoundToInt(loopValue * gameplayStats.ScoreMultiplier);
+                score += points;
+                onScoreChanged?.Invoke(points);
                 Debug.Log("Se acerca Kotaix! Score: " + score);
-                _animator.SetBool("Fail", true);
                 _animator.SetBool("Success", false);
+                _animator.SetBool("Fail", true);
 
                 if (_enemyMovement != null)
                 {
