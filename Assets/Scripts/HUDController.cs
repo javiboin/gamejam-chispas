@@ -15,6 +15,7 @@ public class HUDController : MonoBehaviour
         if (textoScore != null)
         {
             textoScore.text = "SCORE: " + nuevoScore.ToString() + sufijo;
+            Debug.Log("Score actualizado: " + nuevoScore);
         }
     }
 

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
     public HUDController hudController;
     public GameObject panelGameOver;
     public TextMeshProUGUI textoScoreFinal;
+    //public Action onScoreChanged;
 
     [Header("Modo Prueba (Tarea 2 - Punto 3)")]
     public bool modoPruebaClick = true;
@@ -40,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (modoPruebaClick && Input.GetMouseButtonDown(0))
+        if (modoPruebaClick && Keyboard.current.eKey.wasPressedThisFrame)
         {
             Debug.Log("Tenes Puntaje");
             SumarPuntos(1);
@@ -54,7 +56,6 @@ public class GameManager : MonoBehaviour
         ActualizarUI();
     }
 
-   
     public void ActivarGameOver()
     {
         if (textoScoreFinal != null)
