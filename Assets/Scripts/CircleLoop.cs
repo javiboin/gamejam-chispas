@@ -68,6 +68,7 @@ public class CircleLoop : MonoBehaviour
 
                 _spriteRenderer.color = Color.green;
                 PlayResultAnimation(success: true);
+                AudioManager.Instance?.PlayPiedrasChispas();
 
                 if (_chispasGolpe != null) _chispasGolpe.Play();
             }
@@ -84,6 +85,7 @@ public class CircleLoop : MonoBehaviour
                 _spriteRenderer.color = Color.yellow;
 
                 PlayResultAnimation(success: true);
+                AudioManager.Instance?.PlayPiedrasChispas();
 
                 if (_chispasGolpe != null) _chispasGolpe.Play();
             }
