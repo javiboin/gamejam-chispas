@@ -4,11 +4,12 @@ using UnityEngine.InputSystem;
 public class CircleLoop : MonoBehaviour
 {
     [SerializeField] private GameplayStats gameplayStats;
+    [SerializeField] private EnemyMovement _enemyMovement;
     private float loopTime;
     private float elapsed;
     private float loopValue;
-
     private int score;
+    public int Score => score; //publica para mostrarla
 
     private void Start()
     {
@@ -42,9 +43,13 @@ public class CircleLoop : MonoBehaviour
             {
                 score += Mathf.RoundToInt(loopValue * gameplayStats.ScoreMultiplier);
                 Debug.Log("Se acerca Kotaix! Score: " + score);
+          
+            if (_enemyMovement != null)
+            {
+                _enemyMovement.StepForward();
+            }
             }   
         }
-
         // Mathf.PingPong devuelve un valor que oscila entre 0 y 1 en función del tiempo transcurrido. 
         // Al dividir elapsed por loopTime, obtenemos un valor que representa el progreso de la animación en el rango de 0 a 1. 
         // Luego, Mathf.PingPong hace que este valor oscile entre 0 y 1, creando un efecto de ida y vuelta.
