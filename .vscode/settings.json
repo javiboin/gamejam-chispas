@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "gamejam-chispas.slnx"
+    "dotnet.defaultSolution": "kotaix3d.slnx"
 }
