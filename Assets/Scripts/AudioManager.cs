@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class AudioManager : MonoBehaviour
 {
@@ -18,9 +19,15 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip _kotaixScream;   // Kotaix scream
     [SerializeField] private AudioClip _victoryFire;    // sound victory final
 
+    [Header("Ajustes de Volumen")]
+    [Range(0f, 1f)][SerializeField] private float _screamVolume = 0.6f;
+    [SerializeField] private float _fadeOutDuration = 0.6f;
+
     [Header("Nombres de Escenas")]
     [SerializeField] private string _mainMenuSceneName = "MainMenu";
     [SerializeField] private string _gameplaySceneName = "MainScene";
+
+    private Coroutine _fadeCoroutine;
 
     private void Awake()
     {
@@ -48,17 +55,19 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        // Por si arrancás Play directamente desde MainScene o MainMenu
+        
         CambiarMusicaPorEscena(SceneManager.GetActiveScene().name);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        DifuminarEfectos();
         CambiarMusicaPorEscena(scene.name);
     }
 
     private void CambiarMusicaPorEscena(string sceneName)
     {
+
         if (_musicSource == null) return;
 
         AudioClip clipObjetivo = null;
@@ -72,7 +81,7 @@ public class AudioManager : MonoBehaviour
             clipObjetivo = _gameplayMusic;
         }
 
-        if (clipObjetivo != null && _musicSource.clip != clipObjetivo)
+        if (clipObjetivo != null && (_musicSource.clip != clipObjetivo || !_musicSource.isPlaying) ) 
         {
             _musicSource.clip = clipObjetivo;
             _musicSource.loop = true;
@@ -80,23 +89,33 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // --- MÉTODOS PÚBLICOS PARA LLAMAR DESDE LOS SCRIPTS DEL EQUIPO ---
+    
 
     public void PlayPiedrasChispas()
     {
         if (_sfxSource != null && _piedrasChispas != null)
         {
+            CancelarFadeYRestaurarVolumen();
             _sfxSource.PlayOneShot(_piedrasChispas);
         }
     }
 
     public void PlayKotaixScream()
     {
-        if (_sfxSource != null && _kotaixScream != null)
+        if (_musicSource != null)
         {
-            _sfxSource.PlayOneShot(_kotaixScream);
+            _musicSource.Stop();
         }
-        if (_musicSource != null) _musicSource.Stop();
+
+        if (_sfxSource == null || _kotaixScream == null) return;
+
+        if (_sfxSource.isPlaying && _sfxSource.clip == _kotaixScream) return;
+
+        CancelarFadeYRestaurarVolumen();
+        _sfxSource.clip = _kotaixScream;
+        _sfxSource.volume = _screamVolume;
+        _sfxSource.loop = false;
+        _sfxSource.Play();
     }
 
     public void PlayVictoryFire()
@@ -112,4 +131,45 @@ public class AudioManager : MonoBehaviour
             _sfxSource.PlayOneShot(_victoryFire);
         }
     }
+
+    public void DifuminarEfectos()
+    {
+        if (_sfxSource == null || !_sfxSource.isPlaying) return;
+
+        if (_fadeCoroutine != null)
+        {
+            StopCoroutine(_fadeCoroutine);
+        }
+        _fadeCoroutine = StartCoroutine(FadeOutSfxRoutine());
+    }
+
+    private IEnumerator FadeOutSfxRoutine()
+    {
+        float startVolume = _sfxSource.volume;
+        float elapsed = 0f;
+
+        while (elapsed < _fadeOutDuration)
+        {
+            // Usamos unscaledDeltaTime para que funcione incluso si Time.timeScale es 0
+            elapsed += Time.unscaledDeltaTime;
+            _sfxSource.volume = Mathf.Lerp(startVolume, 0f, elapsed / _fadeOutDuration);
+            yield return null;
+        }
+
+        _sfxSource.Stop();
+        _sfxSource.clip = null;
+        _sfxSource.volume = 1f;
+        _fadeCoroutine = null;
+    }
+
+    private void CancelarFadeYRestaurarVolumen()
+    {
+        if (_fadeCoroutine != null)
+        {
+            StopCoroutine(_fadeCoroutine);
+            _fadeCoroutine = null;
+        }
+        _sfxSource.volume = 1f;
+    }
+
 }

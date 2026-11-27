@@ -39,6 +39,7 @@ public class CircleLoop : MonoBehaviour
 
     private void Update()
     {
+        if (Time.timeScale == 0f) return;
         elapsed += Time.deltaTime;
         loopValue = Mathf.PingPong(elapsed / loopTime, 1f);
         float scale = Mathf.Lerp(gameplayStats.MaxScale, gameplayStats.MinScale, loopValue);
