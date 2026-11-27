@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 public class CircleLoop : MonoBehaviour
 {
+    private static readonly int SuccessTrigger = Animator.StringToHash("Success");
+    private static readonly int FailTrigger = Animator.StringToHash("Fail");
     [SerializeField] private GameplayStats gameplayStats;
     [SerializeField] private EnemyMovement _enemyMovement;
     [SerializeField] private Animator _animator;
@@ -43,8 +45,7 @@ public class CircleLoop : MonoBehaviour
                 score += points;
                 onScoreChanged?.Invoke(points);
                 Debug.Log("Suma Extra! Score: " + score);
-                _animator.SetBool("Success", true);
-                _animator.SetBool("Fail", false);
+                PlayResultAnimation(success: true);
 
                 if (_chispasGolpe != null) _chispasGolpe.Play();
             }
@@ -54,8 +55,7 @@ public class CircleLoop : MonoBehaviour
                 score += points;
                 onScoreChanged?.Invoke(points);
                 Debug.Log("Suma puntaje! Score: " + score);
-                _animator.SetBool("Success", true);
-                _animator.SetBool("Fail", false);
+                PlayResultAnimation(success: true);
 
                 if (_chispasGolpe != null) _chispasGolpe.Play();
             }
@@ -65,8 +65,7 @@ public class CircleLoop : MonoBehaviour
                 score += points;
                 onScoreChanged?.Invoke(points);
                 Debug.Log("Se acerca Kotaix! Score: " + score);
-                _animator.SetBool("Success", false);
-                _animator.SetBool("Fail", true);
+                PlayResultAnimation(success: false);
 
                 if (_enemyMovement != null)
                 {
@@ -78,5 +77,12 @@ public class CircleLoop : MonoBehaviour
         // Mathf.PingPong devuelve un valor que oscila entre 0 y 1 en función del tiempo transcurrido. 
         // Al dividir elapsed por loopTime, obtenemos un valor que representa el progreso de la animación en el rango de 0 a 1. 
         // Luego, Mathf.PingPong hace que este valor oscile entre 0 y 1, creando un efecto de ida y vuelta.
+    }
+
+    private void PlayResultAnimation(bool success)
+    {
+        _animator.ResetTrigger(SuccessTrigger);
+        _animator.ResetTrigger(FailTrigger);
+        _animator.SetTrigger(success ? SuccessTrigger : FailTrigger);
     }
 }
