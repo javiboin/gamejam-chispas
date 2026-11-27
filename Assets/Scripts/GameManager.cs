@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public HUDController hudController;
     public GameObject panelGameOver;
     public TextMeshProUGUI textoScoreFinal;
+    //public Action onScoreChanged;
 
     [Header("Modo Prueba (Tarea 2 - Punto 3)")]
     public bool modoPruebaClick = true;

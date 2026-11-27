@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,14 +10,15 @@ public class CircleLoop : MonoBehaviour
     private float elapsed;
     private float loopValue;
 
-    private int score;
+    private int _score;
+    public Action onScoreChanged;
 
     private void Start()
     {
         loopTime = gameplayStats.MaxLoopTime;
         transform.localScale = Vector3.one * gameplayStats.MaxScale;
 
-        score = 0;
+        _score = 0;
     }
 
     private void Update()
@@ -31,22 +33,25 @@ public class CircleLoop : MonoBehaviour
             Debug.Log(loopValue);
             if (loopValue >= 0.8f)
             {
-                score += Mathf.RoundToInt(loopValue * gameplayStats.ExtraScoreMultiplier);
-                Debug.Log("Suma Extra! Score: " + score);
+                _score += Mathf.RoundToInt(loopValue * gameplayStats.ExtraScoreMultiplier);
+                onScoreChanged?.Invoke();
+                Debug.Log("Suma Extra! Score: " + _score);
                 _animator.SetBool("Success", true);
                 _animator.SetBool("Fail", false);
             }
             else if (loopValue >= 0.6f && loopValue < 0.8f)
             {
-                score += Mathf.RoundToInt(loopValue * gameplayStats.ScoreMultiplier);
-                Debug.Log("Suma puntaje! Score: " + score);
+                _score += Mathf.RoundToInt(loopValue * gameplayStats.ScoreMultiplier);
+                onScoreChanged?.Invoke();
+                Debug.Log("Suma puntaje! Score: " + _score);
                 _animator.SetBool("Fail", false);
                 _animator.SetBool("Success", true);
             }
             else
             {
-                score += Mathf.RoundToInt(loopValue * gameplayStats.ScoreMultiplier);
-                Debug.Log("Se acerca Kotaix! Score: " + score);
+                _score += Mathf.RoundToInt(loopValue * gameplayStats.ScoreMultiplier);
+                onScoreChanged?.Invoke(); 
+                Debug.Log("Se acerca Kotaix! Score: " + _score);
                 _animator.SetBool("Fail", true);
                 _animator.SetBool("Success", false);
             }   
