@@ -57,6 +57,11 @@ public class CircleLoop : MonoBehaviour
                 _animator.SetBool("Fail", true);
                 _animator.SetBool("Success", false);
 
+                if (_enemyMovement != null)
+                {
+                    _enemyMovement.StepForward();
+                }
+
             }   
         }
         // Mathf.PingPong devuelve un valor que oscila entre 0 y 1 en función del tiempo transcurrido. 

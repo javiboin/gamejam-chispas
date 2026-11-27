@@ -119,6 +119,79 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &60021987
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 546794996310296172, guid: e6031d8aadecb8f488a326d79c5c0598, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 236.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 546794996310296172, guid: e6031d8aadecb8f488a326d79c5c0598, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 236.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 546794996310296172, guid: e6031d8aadecb8f488a326d79c5c0598, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 236.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 546794996310296172, guid: e6031d8aadecb8f488a326d79c5c0598, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0050439094
+      objectReference: {fileID: 0}
+    - target: {fileID: 546794996310296172, guid: e6031d8aadecb8f488a326d79c5c0598, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.027933102
+      objectReference: {fileID: 0}
+    - target: {fileID: 546794996310296172, guid: e6031d8aadecb8f488a326d79c5c0598, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 546794996310296172, guid: e6031d8aadecb8f488a326d79c5c0598, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: 546794996310296172, guid: e6031d8aadecb8f488a326d79c5c0598, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 546794996310296172, guid: e6031d8aadecb8f488a326d79c5c0598, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 546794996310296172, guid: e6031d8aadecb8f488a326d79c5c0598, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 546794996310296172, guid: e6031d8aadecb8f488a326d79c5c0598, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 546794996310296172, guid: e6031d8aadecb8f488a326d79c5c0598, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 546794996310296172, guid: e6031d8aadecb8f488a326d79c5c0598, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 546794996310296172, guid: e6031d8aadecb8f488a326d79c5c0598, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 926980156176276694, guid: e6031d8aadecb8f488a326d79c5c0598, type: 3}
+      propertyPath: m_Name
+      value: Arboles (Con Material) Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e6031d8aadecb8f488a326d79c5c0598, type: 3}
 --- !u!1 &214162105
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,6 +909,7 @@ GameObject:
   - component: {fileID: 1145992785}
   - component: {fileID: 1145992784}
   - component: {fileID: 1145992783}
+  - component: {fileID: 1145992787}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -938,6 +1012,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 2.708, z: 0}
+--- !u!95 &1145992787
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145992782}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 08ba6b366a6fd5546b7348abe4b27379, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1155548548
 GameObject:
   m_ObjectHideFlags: 0
@@ -1218,7 +1314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f587d0d9fdb78b046885dbc585cd52a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
-  _circleLoop: {fileID: 0}
+  _circleLoop: {fileID: 1651053590}
   _stepDistance: 1
   _moveSpeed: 2
   _stepsToReachThePlayer: 4
@@ -1234,7 +1330,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1651053589}
   - component: {fileID: 1651053588}
-  - component: {fileID: 1651053587}
+  - component: {fileID: 1651053590}
   m_Layer: 0
   m_Name: LoopArea
   m_TagString: Untagged
@@ -1242,19 +1338,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1651053587
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1651053586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8db3977a4ae796d428cd19a4ad7284d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CircleLoop
-  gameplayStats: {fileID: 11400000, guid: 438ffe28d66e1874bb6b7c7af4ced950, type: 2}
 --- !u!212 &1651053588
 SpriteRenderer:
   serializedVersion: 2
@@ -1329,6 +1412,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0.57, y: -102.762, z: -0.098}
+--- !u!114 &1651053590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651053586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54d564e7de9ecba4eb7049bc25077545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CircleLoop
+  gameplayStats: {fileID: 11400000, guid: 438ffe28d66e1874bb6b7c7af4ced950, type: 2}
+  _enemyMovement: {fileID: 1649687052}
+  _animator: {fileID: 1145992787}
 --- !u!1 &1893402644
 GameObject:
   m_ObjectHideFlags: 0
@@ -1708,3 +1806,4 @@ SceneRoots:
   - {fileID: 7934156008311095997}
   - {fileID: 1391988520}
   - {fileID: 788868245}
+  - {fileID: 60021987}
